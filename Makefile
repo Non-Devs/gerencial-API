@@ -48,7 +48,7 @@ down-remove-images:
 
 
 # DJANGO -------------------------------------------------------
-container := "gerencial-api_web_1"
+container := "web"
 
 bash:
 	# Get in the bash of container
@@ -89,7 +89,7 @@ sql: manage.py
 	sudo docker-compose -f ${file} run --rm ${container} python manage.py sqlmigrate ${app_label} ${migration_name}
 
 # TESTS --------------------------------------------------------
-local := "**/tests/"
+local := "**/test/"
 
 test: manage.py
 	# Run tests
@@ -97,7 +97,7 @@ test: manage.py
 
 test-all: manage.py
 	# Run tests
-	sudo docker-compose -f ${file} run --rm ${container} python manage.py test
+	sudo docker-compose -f docker-compose.yml run --rm web python manage.py test
 
 coverage: manage.py
 	# Run django coverage tests
@@ -106,6 +106,10 @@ coverage: manage.py
 coverage-html: manage.py
 	# Create a covarege page based on the tests
 	sudo docker-compose -f ${file} run --rm ${container} coverage html
+
+coverage-report: manage.py
+	# Create a covarege page based on the tests
+	sudo docker-compose -f ${file} run --rm ${container} coverage report
 
 # TRANSLATION --------------------------------------------------
 files := "**/*.py"

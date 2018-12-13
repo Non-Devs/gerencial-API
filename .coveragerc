@@ -5,6 +5,7 @@ omit = *migrations*,
        *test*,
        *admin*,
        ./manage.py,
+       ./wait_for_postgres.py,
        ./API/config/*,
        ./API/wsgi.py,
        *__init__*

@@ -35,3 +35,6 @@ coverage==4.5.2
 django-storages==1.7.1
 boto3==1.9.62
 
+pytest==3.5.0  
+pytest-sugar==0.9.1
+pytest-cov==2.5.1
