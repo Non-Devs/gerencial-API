@@ -22,7 +22,8 @@ after_success:
     docker tag web registry.heroku.com/API-qa/web;
     docker push registry.heroku.com/API-qa/web;
     fi
-
+  - docker-compose run --rm web mkdocs gh-deploy
+  
 notifications:
   email: false
 
