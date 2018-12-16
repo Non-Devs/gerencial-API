@@ -1,30 +1,27 @@
 sudo: required
 language: python
 services:
-  - docker
+- docker
 python:
-  - "3.6"
+- '3.6'
 before_script:
-  - docker-compose build
+- docker-compose build
 script:
-  - docker-compose run --rm web bash -c "flake8 . &&
-                                         python wait_for_postgres.py &&
-                                         ./manage.py test"
-
+- docker-compose run --rm web bash -c "flake8 . && python wait_for_postgres.py &&
+  ./manage.py test"
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com;
-    docker tag web registry.heroku.com/API-prod/web;
-    docker push registry.heroku.com/API-prod/web;
-    fi
-  - if [ "$TRAVIS_BRANCH" == "qa" ]; then
-    docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com;
-    docker tag web registry.heroku.com/API-qa/web;
-    docker push registry.heroku.com/API-qa/web;
-    fi
-
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
+  registry.heroku.com; docker tag web registry.heroku.com/api-prod-gerencial/web; docker push
+  registry.heroku.com/api-prod-gerencial/web; fi
+- if [ "$TRAVIS_BRANCH" == "qa" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
+  registry.heroku.com; docker tag web registry.heroku.com/api-qa/web; docker push
+  registry.heroku.com/api-qa/web; fi
 notifications:
   email: false
-
 cache:
   pip: true
+env:
+  global:
+  - secure: guPivXbj+xxqqM9b/w+YrA1dWoL48TLenNJX77erNq/yhe5LkOoa9jiwqS8whQtdyNJvg5d/sM5rYndof2U9t7yiUfWY30HmkFL9qjDuV37Tfk20vumYWmda75bp4oT5Jv0dGOeMW3nS61PqdzF9tTSgMK5E3ECRt8YRxyDikYgxtwoi1v+F3ihqhAgjr31YmoiC4p+MCS1f461LeJnlI437Aox9AeajHfKLORwI3TXmVXLwqGBchr4pR/HreYROYke8GbDyMioLPKkFvfaZQ/8UmDivYQZmAgi0mHnFYAKXjQnr9W1UmvCqyJrRKxpUZcW4CzWmGYEZ5srQykJtbB5zJ/XwOCNu7SJhVQWTcKyy9tRO9eBMPWMzh6kDoIsZkXeiQOG/t3ebKn1Q9wXxFgQ3pzDL3oAZCs1OgJXL9neb4pD1k1eFLgLLy4fdPaU5bZmBVvc4RmRBv5fDIGE9BlLBBIhlzD0+Jtg+BXAUcpvM8x6V7SH9bQBMsJpquykkNjH3gpSI7SBlVwHTH+Nn/aSjUBM39YwQPT0P+hj++tQblZecJDAUH4ViQccTjgYbcDpMJTYaDfUZNBZW7lQiJCsSQgHKJdx5JLiSBRNJ17R97CkJXfFMOG4+5+D2d7bFhpgQ0LGU67DFPjgqpHxICKrGrXLAWeRczKZC/4sgI6c=
+  - secure: JYuOc61/KYt84Clr2OguokrBnQwfZSjwpA+kFwmlcFLAiBqcuYI7tXWdAvU+mUuN5vFSOH3ZiTm9+ctrze0b5A+Tmrv0FcN8TkTYSEWyn9uN7Nl1CMo6HYAmpNY80dZbiiQwWWcxdY0qIunobJ7Qxky4lSyx7FHk1Q02mk+JoQpt0XMPg46zkErfMJpf3LKrfhXrRRsNhmgVENaVbtmOco57MJfMfwqJkqVreElH/+MSZfyMwyxD3hmnpRvLmOMEtCUt4yN0wcMysy1reUm95tc+hxRsYTkGmczNr3vUjPDj+QEqaDxU/9Pe1H3gnGV5MhV4dFK5GokimxXKT7EWZpTqqTe2BAxGSDc23ANwVHBUL+JCsE6mDP1LMRpwQogp7E9v/9zJZIb5/bpi9TI6DGcfYzsAQ0yabMdAwjfeO3c3RuBcHe7H5BCKID1m2VaKNA6kACtSH3EbkyA547lMOrRzVNoAiwgjY2NVIhi3k3BSouwetfnLs+w04hDagGIUM0rNWzjZfMKsA3LUF6O1L4gvX5m5dMDacMpiXCHSLijDEZRCVXvTUKvPzH/dWencRIuVJwiFXl/CNx/0DrnUylC92nUhQQCQODEDD3EqOdLEDUT8OZdwZZkwGkdamAvNeya/Gtq5TuLczj1dKLu+Gfh3Sv6cfgKEkJMxVEX79dU=
+  - secure: UsYpnIkTtqxsDtXsgTWbhqBa9gzLa/bBeMdQ8KyJ/BCVARbOAf/9vlbmgH8tto5O9uZlBVOpv+bLe6bhp6qfv8/nM7ZE3vqbFw50o7yuCmD5sKXjDegFaGS2obPdsVibcmWLrSAki3IcpnGcOiDVv7AtcvAX4H7SvfNK/HiQpsWvl+SmdbsZwFBl61fXZsgW+pIZrRge0q9qsK+YexgiaYg7sLQdv/LPD/2jeMo1qCK7qxnvACZKKxCiouvBEb5re8c1SO0Mq+rSyLieS8mMECz824ZoTsvksWtd85n45bgYOmGovDwVAq8jup9uk1eNztG2WciZ8Nene6dwRga2UPDcHMXoUsI1KssE3Iba6Snfk9IlDYlasFdUNfzJHuGPDWW3ond9UFd9gVWUqA65tK3WCcxa8JwRDoR2KzjOIRhWFl0CHYruBDm+geJ3Z/ehX27aqtnzqir64RAk1jYfnYOM05d7khAn/j1lXeOIBSfCZqvlJTHF7x9xCw/s0N1Z76kaIYyFhy/8P9XkV11Ewjw2BdbUGb3TZNZk0atF1i9ltP3WmbUxMzPtd9QHyHE2N35aypXNBkKEr37lR7hPknKdLcPwm5mRXHcmk5g3gvxqUDV+lfuhOI7DbQ0CQsimJAvf9HNNe4BZ7el5PBsNpNy2sBllCjRfqx/YpYrjSqI=
