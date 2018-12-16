@@ -4,8 +4,6 @@ services:
 - docker
 python:
 - '3.6'
-before_install:
-- chmod +x mkdocs-build.sh
 before_script:
 - docker-compose build
 script:
