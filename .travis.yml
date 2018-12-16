@@ -8,15 +8,9 @@ before_install:
 - chmod +x mkdocs-build.sh
 before_script:
 - docker-compose build
-- DEPLOY_DOCS="$(if [[ $TRAVIS_BRANCH == 'master' || $TRAVIS_BRANCH == 'develop' ]];
-  then if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then echo -n 'true'; else echo -n
-  'false'; fi; fi)"
 script:
 - docker-compose run --rm web bash -c "flake8 . && python wait_for_postgres.py &&
   ./manage.py test"
-after_script:
-- if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation"
-  ; ./mkdocs-build.sh ; echo "Completed deploying documentation" ; fi
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
   registry.heroku.com; docker tag web registry.heroku.com/API-prod/web; docker push
