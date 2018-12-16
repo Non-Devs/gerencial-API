@@ -5,13 +5,23 @@
 
 Repositório da API do sistema de Gerenciamento de Alunos. Check out the project's [documentation](http://Non-Devs.github.io/gerencial-API/).
 
-# Prerequisites
+## **Sistema de gerenciamento escolar**	
+
+(Página em construção)
+
+Bem vindo à wiki! Esse é o local onde você encontra a documentação do projeto, tutoriais e algumas outras coisas. Caso queira contribuir para o projeto sinta-se à vontade. 
+
+O índice geral encontra-se na lateral.
+
+<!-- 
+# Pré-requisitos
 
 - [Docker](https://docs.docker.com/docker-for-mac/install/)  
 - [Travis CLI](http://blog.travis-ci.com/2013-01-14-new-client/)
 - [Heroku Toolbelt](https://toolbelt.heroku.com/)
 
-# Initialize the project
+
+# Inicializando o 
 
 Start the dev server for local development:
 
@@ -70,3 +80,4 @@ git checkout -b qa && \
 git push -u origin qa
 ```
 You're ready to continuously ship! ✨ 💅 🛳
+-->
