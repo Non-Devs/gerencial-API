@@ -1,9 +1,5 @@
 #!/bin/bash
 
-readonly api-prod-gerencial=$1
-readonly web=$2
-readonly HEROKU_AUTH_TOKEN=$4
-
 imageId=$(docker inspect registry.heroku.com/api-prod-gerencial/web --format={{.Id}})
 payload='{"updates":[{"type":"web","docker_image":"'"$imageId"'"}]}'
 curl -n -X PATCH https://api.heroku.com/apps/api-prod-gerencial/formation \
