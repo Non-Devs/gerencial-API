@@ -1,14 +1,5 @@
 #!/bin/bash
 
-if [ $# -ne 4 ]; then
-  echo "The number of parameters is $#." 1>&2
-  echo "4 parameters required." 1>&2
-  echo "1 - api-prod-gerencial" 1>&2
-  echo "2 - web" 1>&2
-  echo "4 - HEROKU_AUTH_TOKEN" 1>&2
-  exit 1
-fi
-
 readonly api-prod-gerencial=$1
 readonly web=$2
 readonly HEROKU_AUTH_TOKEN=$4
