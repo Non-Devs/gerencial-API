@@ -3,6 +3,7 @@ set -o errexit
 
 rm -rf public
 mkdir public
+cd public
 
 # config
 git config --global user.email "${GH_USER_EMAIL}"
@@ -12,7 +13,7 @@ git config --global user.name "${GH_USER_NAME}"
 mkdocs build --clean
 
 # deploy
-cd public
+
 git init
 git add .
 git commit -m "Deploy to Github Pages"
