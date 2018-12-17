@@ -17,3 +17,4 @@ git init
 git add .
 git commit -m "Deploy to Github Pages"
 git push --force --quiet "https://${GH_TOKEN}@github.com/Non-Devs/gerencial-API.git" develop:gh-pages > /dev/null 2>&1
+echo "Completed deploying documentation"
