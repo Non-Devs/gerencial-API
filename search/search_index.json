@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "gerencial-API\n\n\n\n\n\n\nReposit\u00f3rio da API do sistema de Gerenciamento de Alunos. Check out the project's \ndocumentation\n.\n\n\nPrerequisites\n\n\n\n\nDocker\n  \n\n\nTravis CLI\n\n\nHeroku Toolbelt\n\n\n\n\nInitialize the project\n\n\nStart the dev server for local development:\n\n\ndocker-compose up\n\n\n\n\nCreate a superuser to login to the admin:\n\n\ndocker-compose run --rm web ./manage.py createsuperuser\n\n\n\n\nContinuous Deployment\n\n\nDeployment automated via Travis. When builds pass on the master or qa branch, Travis will deploy that branch to Heroku. Enable this by:\n\n\nCreating the production sever:\n\n\nheroku create API-prod --remote prod && \\\n    heroku addons:create newrelic:wayne --app API-prod && \\\n    heroku addons:create heroku-postgresql:hobby-dev --app API-prod && \\\n    heroku config:set DJANGO_SECRET=`openssl rand -base64 32` \\\n        DJANGO_AWS_ACCESS_KEY_ID=\"Add your id\" \\\n        DJANGO_AWS_SECRET_ACCESS_KEY=\"Add your key\" \\\n        DJANGO_AWS_STORAGE_BUCKET_NAME=\"API-prod\" \\\n        --app API-prod\n\n\n\n\nCreating the qa sever:\n\n\nheroku create `API-qa --remote qa && \\\n    heroku addons:create newrelic:wayne && \\\n    heroku addons:create heroku-postgresql:hobby-dev && \\\n    heroku config:set DJANGO_SECRET=`openssl rand -base64 32` \\\n        DJANGO_AWS_ACCESS_KEY_ID=\"Add your id\" \\\n        DJANGO_AWS_SECRET_ACCESS_KEY=\"Add your key\" \\\n        DJANGO_AWS_STORAGE_BUCKET_NAME=\"API-qa\" \\\n\n\n\n\nSecurely add your heroku credentials to travis so it can automatically deploy your changes.\n\n\ntravis encrypt HEROKU_AUTH_TOKEN=\"$(heroku auth:token)\" --add\n\n\n\n\nCommit your changes and push to master and qa to trigger your first deploys:\n\n\ngit commit -m \"ci(travis): added heroku credentials\" && \\\ngit push origin master && \\\ngit checkout -b qa && \\\ngit push -u origin qa\n\n\n\n\nYou're ready to continuously ship! \u2728 \ud83d\udc85 \ud83d\udef3",
+            "text": "gerencial-API\n\n\n\n\n\n\nReposit\u00f3rio da API do sistema de Gerenciamento de Alunos. Check out the project's \ndocumentation\n.\n\n\nSistema de gerenciamento escolar\n\n\n(P\u00e1gina em constru\u00e7\u00e3o)\n\n\nBem vindo \u00e0 wiki! Esse \u00e9 o local onde voc\u00ea encontra a documenta\u00e7\u00e3o do projeto, tutoriais e algumas outras coisas. Caso queira contribuir para o projeto sinta-se \u00e0 vontade. \n\n\nO \u00edndice geral encontra-se na lateral.",
             "title": "Home"
         },
         {
@@ -11,19 +11,9 @@
             "title": "gerencial-API"
         },
         {
-            "location": "/#prerequisites",
-            "text": "Docker     Travis CLI  Heroku Toolbelt",
-            "title": "Prerequisites"
-        },
-        {
-            "location": "/#initialize-the-project",
-            "text": "Start the dev server for local development:  docker-compose up  Create a superuser to login to the admin:  docker-compose run --rm web ./manage.py createsuperuser",
-            "title": "Initialize the project"
-        },
-        {
-            "location": "/#continuous-deployment",
-            "text": "Deployment automated via Travis. When builds pass on the master or qa branch, Travis will deploy that branch to Heroku. Enable this by:  Creating the production sever:  heroku create API-prod --remote prod && \\\n    heroku addons:create newrelic:wayne --app API-prod && \\\n    heroku addons:create heroku-postgresql:hobby-dev --app API-prod && \\\n    heroku config:set DJANGO_SECRET=`openssl rand -base64 32` \\\n        DJANGO_AWS_ACCESS_KEY_ID=\"Add your id\" \\\n        DJANGO_AWS_SECRET_ACCESS_KEY=\"Add your key\" \\\n        DJANGO_AWS_STORAGE_BUCKET_NAME=\"API-prod\" \\\n        --app API-prod  Creating the qa sever:  heroku create `API-qa --remote qa && \\\n    heroku addons:create newrelic:wayne && \\\n    heroku addons:create heroku-postgresql:hobby-dev && \\\n    heroku config:set DJANGO_SECRET=`openssl rand -base64 32` \\\n        DJANGO_AWS_ACCESS_KEY_ID=\"Add your id\" \\\n        DJANGO_AWS_SECRET_ACCESS_KEY=\"Add your key\" \\\n        DJANGO_AWS_STORAGE_BUCKET_NAME=\"API-qa\" \\  Securely add your heroku credentials to travis so it can automatically deploy your changes.  travis encrypt HEROKU_AUTH_TOKEN=\"$(heroku auth:token)\" --add  Commit your changes and push to master and qa to trigger your first deploys:  git commit -m \"ci(travis): added heroku credentials\" && \\\ngit push origin master && \\\ngit checkout -b qa && \\\ngit push -u origin qa  You're ready to continuously ship! \u2728 \ud83d\udc85 \ud83d\udef3",
-            "title": "Continuous Deployment"
+            "location": "/#sistema-de-gerenciamento-escolar",
+            "text": "(P\u00e1gina em constru\u00e7\u00e3o)  Bem vindo \u00e0 wiki! Esse \u00e9 o local onde voc\u00ea encontra a documenta\u00e7\u00e3o do projeto, tutoriais e algumas outras coisas. Caso queira contribuir para o projeto sinta-se \u00e0 vontade.   O \u00edndice geral encontra-se na lateral.",
+            "title": "Sistema de gerenciamento escolar"
         },
         {
             "location": "/api/authentication/",

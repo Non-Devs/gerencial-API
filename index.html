@@ -91,9 +91,7 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#gerencial-api">gerencial-API</a></li>
-        <li class="main "><a href="#prerequisites">Prerequisites</a></li>
-        <li class="main "><a href="#initialize-the-project">Initialize the project</a></li>
-        <li class="main "><a href="#continuous-deployment">Continuous Deployment</a></li>
+            <li><a href="#sistema-de-gerenciamento-escolar">Sistema de gerenciamento escolar</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -102,56 +100,62 @@
 <p><a href="https://travis-ci.org/Non-Devs/gerencial-API"><img alt="Build Status" src="https://travis-ci.org/Non-Devs/gerencial-API.svg?branch=master" /></a>
 <a href="https://github.com/agconti/cookiecutter-django-rest"><img alt="Built with" src="https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg" /></a></p>
 <p>Repositório da API do sistema de Gerenciamento de Alunos. Check out the project's <a href="http://Non-Devs.github.io/gerencial-API/">documentation</a>.</p>
-<h1 id="prerequisites">Prerequisites</h1>
-<ul>
-<li><a href="https://docs.docker.com/docker-for-mac/install/">Docker</a>  </li>
-<li><a href="http://blog.travis-ci.com/2013-01-14-new-client/">Travis CLI</a></li>
-<li><a href="https://toolbelt.heroku.com/">Heroku Toolbelt</a></li>
-</ul>
-<h1 id="initialize-the-project">Initialize the project</h1>
-<p>Start the dev server for local development:</p>
-<pre><code class="bash">docker-compose up
-</code></pre>
+<h2 id="sistema-de-gerenciamento-escolar"><strong>Sistema de gerenciamento escolar</strong></h2>
+<p>(Página em construção)</p>
+<p>Bem vindo à wiki! Esse é o local onde você encontra a documentação do projeto, tutoriais e algumas outras coisas. Caso queira contribuir para o projeto sinta-se à vontade. </p>
+<p>O índice geral encontra-se na lateral.</p>
+<!-- 
+# Pré-requisitos
 
-<p>Create a superuser to login to the admin:</p>
-<pre><code class="bash">docker-compose run --rm web ./manage.py createsuperuser
-</code></pre>
+- [Docker](https://docs.docker.com/docker-for-mac/install/)  
+- [Travis CLI](http://blog.travis-ci.com/2013-01-14-new-client/)
+- [Heroku Toolbelt](https://toolbelt.heroku.com/)
 
-<h1 id="continuous-deployment">Continuous Deployment</h1>
-<p>Deployment automated via Travis. When builds pass on the master or qa branch, Travis will deploy that branch to Heroku. Enable this by:</p>
-<p>Creating the production sever:</p>
-<pre><code>heroku create API-prod --remote prod &amp;&amp; \
-    heroku addons:create newrelic:wayne --app API-prod &amp;&amp; \
-    heroku addons:create heroku-postgresql:hobby-dev --app API-prod &amp;&amp; \
-    heroku config:set DJANGO_SECRET=`openssl rand -base64 32` \
-        DJANGO_AWS_ACCESS_KEY_ID=&quot;Add your id&quot; \
-        DJANGO_AWS_SECRET_ACCESS_KEY=&quot;Add your key&quot; \
-        DJANGO_AWS_STORAGE_BUCKET_NAME=&quot;API-prod&quot; \
-        --app API-prod
-</code></pre>
 
-<p>Creating the qa sever:</p>
-<pre><code>heroku create `API-qa --remote qa &amp;&amp; \
-    heroku addons:create newrelic:wayne &amp;&amp; \
-    heroku addons:create heroku-postgresql:hobby-dev &amp;&amp; \
-    heroku config:set DJANGO_SECRET=`openssl rand -base64 32` \
-        DJANGO_AWS_ACCESS_KEY_ID=&quot;Add your id&quot; \
-        DJANGO_AWS_SECRET_ACCESS_KEY=&quot;Add your key&quot; \
-        DJANGO_AWS_STORAGE_BUCKET_NAME=&quot;API-qa&quot; \
-</code></pre>
+# Inicializando o 
 
-<p>Securely add your heroku credentials to travis so it can automatically deploy your changes.</p>
-<pre><code class="bash">travis encrypt HEROKU_AUTH_TOKEN=&quot;$(heroku auth:token)&quot; --add
-</code></pre>
+Start the dev server for local development:
 
-<p>Commit your changes and push to master and qa to trigger your first deploys:</p>
-<pre><code class="bash">git commit -m &quot;ci(travis): added heroku credentials&quot; &amp;&amp; \
-git push origin master &amp;&amp; \
-git checkout -b qa &amp;&amp; \
-git push -u origin qa
-</code></pre>
 
-<p>You're ready to continuously ship! ✨ 💅 🛳</p></div>
+wzxhzdk:0
+
+
+Create a superuser to login to the admin:
+
+
+wzxhzdk:1
+
+
+
+# Continuous Deployment
+
+Deployment automated via Travis. When builds pass on the master or qa branch, Travis will deploy that branch to Heroku. Enable this by:
+
+Creating the production sever:
+
+
+wzxhzdk:2
+
+
+Creating the qa sever:
+
+
+wzxhzdk:3
+
+
+Securely add your heroku credentials to travis so it can automatically deploy your changes.
+
+
+wzxhzdk:4
+
+
+Commit your changes and push to master and qa to trigger your first deploys:
+
+
+wzxhzdk:5
+
+You're ready to continuously ship! ✨ 💅 🛳
+--></div>
         </div>
 
         <footer class="col-md-12">
@@ -234,5 +238,5 @@ git push -u origin qa
 
 <!--
 MkDocs version : 0.17.5
-Build Date UTC : 2018-12-14 20:48:11
+Build Date UTC : 2018-12-17 19:42:20
 -->
