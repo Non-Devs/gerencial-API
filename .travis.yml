@@ -7,8 +7,8 @@ python:
 before_install:
 - chmod +x mkdocs-build.sh
 before_script:
+- DEPLOY_DOCS="$(if [ $TRAVIS_BRANCH == 'master' || $TRAVIS_BRANCH == 'develop' ]; then if [ $TRAVIS_PULL_REQUEST == 'false' ]; then echo -n 'true'; else echo -n 'false'; fi; fi)"
 - docker-compose build
-- DEPLOY_DOCS="$(if [[ $TRAVIS_BRANCH == 'master']]; then if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then echo -n 'true'; else echo -n 'false'; fi; fi)"
 script:
 - docker-compose run --rm web bash -c "flake8 . && python wait_for_postgres.py &&
   ./manage.py test"
