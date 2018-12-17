@@ -2,20 +2,12 @@
 set -o errexit
 
 rm -rf public
-mkdir public
-cd public
 
 # config
 git config --global user.email "${GH_USER_EMAIL}"
 git config --global user.name "${GH_USER_NAME}"
+git remote add gh-token "hthttps://${GH_TOKEN}@github.com/Non-Devs/gerencial-API.git";
+git fetch gh-token && git fetch gh-token gh-pages:gh-pages;
+mkdocs gh-deploy --clean --remote-name gh-token;
 
-# build (CHANGE THIS)
-mkdocs build --clean
-
-# deploy
-
-git init
-git add .
-git commit -m "Deploy to Github Pages"
-git push --force --quiet "https://${GH_TOKEN}@github.com/Non-Devs/gerencial-API.git" develop:gh-pages > /dev/null 2>&1
 echo "Completed deploying documentation"
