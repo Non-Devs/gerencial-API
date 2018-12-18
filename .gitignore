@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
 # C extensions
 *.so
 
@@ -46,6 +47,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+.coveralls.yml
 
 # Translations
 *.mo
@@ -56,6 +58,7 @@ coverage.xml
 .static_storage/
 .media/
 local_settings.py
+.pytest_cache/
 
 # Flask stuff:
 instance/
