@@ -5,14 +5,16 @@ services:
 python:
 - '3.6'
 before_install:
+- openssl aes-256-cbc -K $encrypted_194b131a019d_key -iv $encrypted_194b131a019d_iv
+  -in .coveralls.yml.enc -out .coveralls.yml -d
 - chmod +x mkdocs-build.sh
 before_script:
-- DEPLOY_DOCS="$(if [ $TRAVIS_BRANCH == 'master'];
-  then if [ $TRAVIS_PULL_REQUEST == 'false' ]; then echo -n 'true'; else echo -n 'false';
-  fi; fi)"
+- DEPLOY_DOCS="$(if [ $TRAVIS_BRANCH == 'master']; then if [ $TRAVIS_PULL_REQUEST
+  == 'false' ]; then echo -n 'true'; else echo -n 'false'; fi; fi)"
 - docker-compose build
 script:
-- docker-compose run --rm web bash -c "flake8 . && python wait_for_postgres.py && ./manage.py test"
+- docker-compose run --rm web bash -c "flake8 . && python wait_for_postgres.py &&
+  ./manage.py test"
 after_script:
 - if [ $DEPLOY_DOCS == "true" ]; then echo "Preparing to build and deploy documentation"
   ; ./mkdocs-build.sh ; echo "Completed deploying documentation" ; fi
