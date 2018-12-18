@@ -9,7 +9,7 @@ before_install:
   -in .coveralls.yml.enc -out .coveralls.yml -d
 - chmod +x mkdocs-build.sh
 before_script:
-- DEPLOY_DOCS="$(if [ $TRAVIS_BRANCH == 'master']; then if [ $TRAVIS_PULL_REQUEST
+- DEPLOY_DOCS="$(if [ $TRAVIS_BRANCH == 'master' ]; then if [ $TRAVIS_PULL_REQUEST
   == 'false' ]; then echo -n 'true'; else echo -n 'false'; fi; fi)"
 - docker-compose build
 script:
