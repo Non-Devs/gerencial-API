@@ -25,7 +25,7 @@ after_success:
   registry.heroku.com; docker tag web registry.heroku.com/api-qa/web; docker push
   registry.heroku.com/api-qa/web; bash ./heroku-container-release.sh api-prod-gerencial
   web $HEROKU_AUTH_TOKEN; fi
-- docker-compose exec -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e TRAVIS_BRANCH="$TRAVIS_BRANCH" run --rm web coveralls
+- docker-compose run --rm web coveralls
 notifications:
   email: false
 cache:
