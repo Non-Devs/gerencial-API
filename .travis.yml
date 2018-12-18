@@ -16,7 +16,7 @@ script:
 - docker-compose run --rm web bash -c "flake8 . && python wait_for_postgres.py &&
   ./manage.py test"
 after_script:
-- if [ $DEPLOY_DOCS == "true" ]; then echo "Preparing to build and deploy documentation"
+- if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation"
   ; ./mkdocs-build.sh ; echo "Completed deploying documentation" ; fi
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
