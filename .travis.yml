@@ -22,12 +22,11 @@ after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
   registry.heroku.com; docker tag web registry.heroku.com/api-prod-gerencial/web;
   docker push registry.heroku.com/api-prod-gerencial/web; bash ./heroku-container-release.sh
-  api-prod-gerencial web $HEROKU_AUTH_TOKEN; fi
+  api-prod-gerencial web $HEROKU_AUTH_TOKEN; docker-compose run --rm web coveralls; fi
 - if [ "$TRAVIS_BRANCH" == "qa" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
   registry.heroku.com; docker tag web registry.heroku.com/api-qa/web; docker push
   registry.heroku.com/api-qa/web; bash ./heroku-container-release.sh api-prod-gerencial
-  web $HEROKU_AUTH_TOKEN; fi
-- docker-compose run --rm web coveralls
+  web $HEROKU_AUTH_TOKEN; docker-compose run --rm web coveralls; fi
 notifications:
   email: false
 cache:
