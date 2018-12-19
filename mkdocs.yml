@@ -4,9 +4,13 @@ repo_url: https://github.com/Non-Devs/gerencial-API
 site_dir: site
 copyright: Copyright &copy; 2018, <a href="https://github.com/Non-Devs">Non-Devs</a>.
 dev_addr: 0.0.0.0:8001
+theme:
+  name: 'material'
 
 pages:
   - Home: 'index.md'
+  - Documentação: 
+    - Documento de visão: 'documentation/doc_visao.md'
   - API:
     - Authentication: 'api/authentication.md'
     - Users: 'api/users.md'
