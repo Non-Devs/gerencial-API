@@ -8,9 +8,9 @@ theme:
   name: 'material'
 
 pages:
-  - Home: 'index.md'
-  - Documentação: 
-    - Documento de visão: 'documentation/doc_visao.md'
+  - Gerencial: 'index.md'
   - API:
     - Authentication: 'api/authentication.md'
     - Users: 'api/users.md'
+  - Documentação: 
+    - Documento de visão: 'documentation/doc_visao.md'
