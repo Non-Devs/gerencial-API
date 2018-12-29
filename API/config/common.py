@@ -82,7 +82,6 @@ class Common(Configuration):
     )
     STATICFILES_STORAGE = 'API.config.storage.WhiteNoiseStaticFilesStorage'
 
-
     # Media files
     MEDIA_ROOT = join(os.path.dirname(BASE_DIR), 'media')
     MEDIA_URL = '/media/'
