@@ -132,3 +132,12 @@ staticfiles: manage.py
 doc: mkdocs.yml
 	# Deploy all documentation
 	mkdocs gh-deploy 
+
+# HEROKU -------------------------------------------------
+
+deploy-local: 
+	# Deploy locally with heroku
+	$(warning You need to be inside VENV or you will get some errors) 
+	$(warning AND you need a procfile)  
+	read -p "Press enter to continue"
+	heroku local web
