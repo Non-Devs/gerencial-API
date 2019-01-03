@@ -97,7 +97,7 @@ test: manage.py
 
 test-all: manage.py
 	# Run tests
-	sudo docker-compose -f docker-compose.yml run --rm web python manage.py test
+	sudo docker-compose -f docker-compose.yml run --rm web  bash -c "coverage run --source . -m py.test && coverage report"
 
 coverage: manage.py
 	# Run django coverage tests

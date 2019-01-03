@@ -31,8 +31,8 @@ factory-boy==2.11.1
 django-nose==1.4.6
 nose-progressive==1.5.2
 coverage==4.5.2
-coveralls==1.5.1
-pytest==3.5.0  
+pytest==4.0.2
+pytest-django==3.4.4
 pytest-sugar==0.9.1
 pytest-cov==2.5.1
 codecov==2.0.15

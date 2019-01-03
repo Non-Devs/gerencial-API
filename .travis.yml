@@ -14,7 +14,7 @@ before_script:
 - docker-compose build
 script:
 # Removed <flake8 .> temporialy 
-- docker-compose run --rm web bash -c "python wait_for_postgres.py && ./manage.py test"
+- docker-compose run --rm web bash -c "python wait_for_postgres.py && coverage run --source . -m py.test"
 after_script:
 - if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation"
   ; ./mkdocs-build.sh ; echo "Completed deploying documentation" ; fi
