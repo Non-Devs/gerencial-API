@@ -93,24 +93,16 @@ local := "**/test/"
 
 test: manage.py
 	# Run tests
-	sudo docker-compose -f ${file} run --rm ${container} python manage.py test ${local}
+	sudo docker-compose -f ${file} run --rm ${container} coverage run --source==${local} -m py.test 
 
 test-all: manage.py
 	# Run tests
 	sudo docker-compose -f docker-compose.yml run --rm web  bash -c "coverage run --source . -m py.test && coverage report"
 
-coverage: manage.py
-	# Run django coverage tests
-	sudo docker-compose -f local.yml run --rm ${container} coverage run -m py.test
-
 coverage-html: manage.py
 	# Create a covarege page based on the tests
 	sudo rm -rf htmlcov
 	sudo docker-compose -f ${file} run --rm ${container} coverage html
-
-coverage-report: manage.py
-	# Create a covarege page based on the tests
-	sudo docker-compose -f ${file} run --rm ${container} coverage report
 
 # TRANSLATION --------------------------------------------------
 files := "**/*.py"
