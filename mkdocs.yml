@@ -14,3 +14,4 @@ pages:
     - Users: 'api/users.md'
   - Documentação: 
     - Documento de visão: 'documentation/doc_visao.md'
+    - Contribuindo: 'documentation/contrib.md'

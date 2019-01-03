@@ -13,20 +13,24 @@ before_script:
   == 'false' ]; then echo -n 'true'; else echo -n 'false'; fi; fi)"
 - docker-compose build
 script:
-- docker-compose run --rm web bash -c "flake8 . && python wait_for_postgres.py &&
-  ./manage.py test"
+# Removed <flake8 .> temporialy 
+- docker-compose run --rm web bash -c "python wait_for_postgres.py && coverage run --source . -m py.test"
 after_script:
 - if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation"
   ; ./mkdocs-build.sh ; echo "Completed deploying documentation" ; fi
 after_success:
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
-  registry.heroku.com; docker tag web registry.heroku.com/api-prod-gerencial/web;
-  docker push registry.heroku.com/api-prod-gerencial/web; bash ./heroku-container-release.sh
-  api-prod-gerencial web $HEROKU_AUTH_TOKEN; docker-compose run --rm web coveralls; fi
-- if [ "$TRAVIS_BRANCH" == "qa" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
-  registry.heroku.com; docker tag web registry.heroku.com/api-qa/web; docker push
-  registry.heroku.com/api-qa/web; bash ./heroku-container-release.sh api-prod-gerencial
-  web $HEROKU_AUTH_TOKEN; docker-compose run --rm web coveralls; fi
+- if [[ $TRAVIS_PULL_REQUEST == 'true' ]] || [[ "$TRAVIS_BRANCH" == "master" ]]; 
+  then docker-compose run --rm web codecov --token=$CODECOV_TOKEN; fi
+- if [ "$TRAVIS_BRANCH" == "master" ]; then if [ $TRAVIS_PULL_REQUEST == 'false' ];  then
+  docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com; docker
+  tag web registry.heroku.com/api-prod-gerencial/web; docker push registry.heroku.com/api-prod-gerencial/web;
+  bash ./heroku-container-release.sh api-prod-gerencial web $HEROKU_AUTH_TOKEN; docker-compose
+  run --rm web coveralls; fi; fi
+- if [ "$TRAVIS_BRANCH" == "qa" ]; then if [ $TRAVIS_PULL_REQUEST == 'false' ]; then
+  docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com; docker
+  tag web registry.heroku.com/api-qa/web; docker push registry.heroku.com/api-qa/web;
+  bash ./heroku-container-release.sh api-prod-gerencial web $HEROKU_AUTH_TOKEN; docker-compose
+  run --rm web coveralls; fi; fi
 notifications:
   email: false
 cache:
@@ -38,3 +42,4 @@ env:
   - secure: UsYpnIkTtqxsDtXsgTWbhqBa9gzLa/bBeMdQ8KyJ/BCVARbOAf/9vlbmgH8tto5O9uZlBVOpv+bLe6bhp6qfv8/nM7ZE3vqbFw50o7yuCmD5sKXjDegFaGS2obPdsVibcmWLrSAki3IcpnGcOiDVv7AtcvAX4H7SvfNK/HiQpsWvl+SmdbsZwFBl61fXZsgW+pIZrRge0q9qsK+YexgiaYg7sLQdv/LPD/2jeMo1qCK7qxnvACZKKxCiouvBEb5re8c1SO0Mq+rSyLieS8mMECz824ZoTsvksWtd85n45bgYOmGovDwVAq8jup9uk1eNztG2WciZ8Nene6dwRga2UPDcHMXoUsI1KssE3Iba6Snfk9IlDYlasFdUNfzJHuGPDWW3ond9UFd9gVWUqA65tK3WCcxa8JwRDoR2KzjOIRhWFl0CHYruBDm+geJ3Z/ehX27aqtnzqir64RAk1jYfnYOM05d7khAn/j1lXeOIBSfCZqvlJTHF7x9xCw/s0N1Z76kaIYyFhy/8P9XkV11Ewjw2BdbUGb3TZNZk0atF1i9ltP3WmbUxMzPtd9QHyHE2N35aypXNBkKEr37lR7hPknKdLcPwm5mRXHcmk5g3gvxqUDV+lfuhOI7DbQ0CQsimJAvf9HNNe4BZ7el5PBsNpNy2sBllCjRfqx/YpYrjSqI=
   - secure: iMn6jsPvbqkEsvz1gbJDH/UiyLd80C9TRJQjbh3SSTdJx595S4jXOkGCBgN0u6zEVA3Uu7FbBCTBKRSMvPnoJv4Lw0m6GCVIrSGfgEAyCKAAWPXjac0OteYFqNs1TRMJlMchiDkqlg/zlXUWMCqXoMfSMz93kVEJJ3qO8RJUjtZ/sPv4NC0LA4hFwjXKfPSnyBaebqrSyM+5f240KCzVu/0jTbvrujOdbOcRutRbmdXwdDUlOPkLVm+CeGDXk7olZXaBiof+qlJ5Qk7dnDK7KWkDSmebNFGlJU2J66P7AspFVyK0Gf5J5+mgz+BNYSWydrui3Fyc3oXdSCZKb5XqokjWd1VswWbhh0qtghNHabZnG7XZLSDzmdNvjE4+YhDSfx/axJodAni9ca7VVJUFpYeMCaWdrCx8efFJkgq/5bjk4xZlDvaqAjpsQsXOa5psj2KyO3hFCcQA0qrx1127H5yyA2c9klQl12laK3rpzOlq8/1H8VmIyOnDrw1diT9gCcaF3q+KcTiOGvyrTvwvJyRIgsiNxEj9cYvNEzUo47T3XO7RfDu5RMW0pKzOrpsJEmiN/al+bTzh78e7/Qm5v6jinfNSDWWVifS1pvi7x0VOxoHWjPBSl+sIwCPzkqztfsA1jGd6h23j5IO7OKgXSaylSEMX+v+XbM673S4vtWc=
   - secure: khuNQl0CBaEilw5BjUBCo6MCRlSCETDpunLKaF+aZY2ovWvqfhup9JaBWyoYKCZDnIcqaAwTzV28vWsX8LWeMlvTo2eBG40Z69Y41MOz3ErdiFaadFEjoTBgH9NabMbIXnBrYSVQrXDLJFp0t0ylXuY+9PTK1OOlC0ZROlFIk7yBmFXahCFQdTUIvh1dhL2T221yCzv27Zt8edttD5+y4NXPvfBJsEf8GqVc+MsGRbI1u9JzyJYrU+rjxTsidtZ7hi4M4lVV2hHmb8JD4yIdKobjvjOVALhZtmFosQymdsM1Mt2dskzxJWVhl96qWzrvQkAEi8PjA/bEPZKJILLeuz3EZ43Cziiq+4h3VsF0fPTEgL/Bj9TJL3E3sAR3XNZQqKyDB1eIsVzmCd6uWFoMIHw4d8OyF4V766GAJKGHn7G/GgAaeo6krnSmtoGMwRhVsms3nRQ4PGJu29hZgQ/jeHD6st4yxtAJs6rvX6UPJ05FIwBiI4cgl2habZOxMkUK3PZ2DFt79MHsvXcKH/qOXRq6wgOuAwJDjjjH3crDDQyPZSeRyOrg0/sKWg920K94s+7MA1RjPuf28Ze3cKLadYb1svcwphh4HEj/QskiYXJfcF2vn1kqZ+q1NlhxUZfyTiabs0vJBq2/B9Q4+xkREfVVuSy8vzC/3fe6cLb8YB4=
+  - secure: caxXlidU1yjGkZMtMWf0u7cra7CH7kfbSKiYyFGcPgpPu33a4gApB0DIGT3qbC3Gk4JcuddRaX/Sfh2XiksgSAa+pcMZCnP7WXBEom0Kaax/dJB4sjWP9rbBSlz7QoU+NfT5XAt530wMPwutAbdw7jgy5MOfqqnsPEXcFY9VMo5d7Va8QYbFwa5+LjiQfjulM/n5XHdzaxcpwiZYNnMSQ7vahwuV1AsVbEhDqKpMehiaeCaHG0NjlE6asPYVl8a+o2GCzf+0NJizqVUbcY8lPRmxtr68qo2Mpd1XQCJOkbcRlZxQllREGC9R2Uk4qz13LUiMqsbvCiffAL64hy4FCpt6uZKko0tO1zd8wSiG1JX6ECnzP8SnNhMIFVTWcjg56uG3lUTUYNQ8DnDygECToVoFZBkpjLxs/QwaxyNZzUMsD6TowGjpP3xsOnehxTkx5V3pjoS1rOYJFJuezvJoNJrxlzLLctvBxRwn7sBswle6XJyHcnzUM7z0K0ziZPQZk0BrxBtgYHCSxZJIZjl6pmBz3a5BhZjSN31oS9y3M7DtigIRtj5PLTiJGpz2q7JXPfyGf2kr2iD4NiL4SQ+FSRpdvdWG5ykCKD5JbEM93CyKZH/ToMsELqMQOcUOwltK7YDsEsTVdf/qissFa3z5ZMRCpgGPctTYP0Vm8YCAoVc=
