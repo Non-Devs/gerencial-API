@@ -1,5 +1,5 @@
 # gerencial-API
-[![Coverage Status](https://coveralls.io/repos/github/Non-Devs/gerencial-API/badge.svg?branch=master)](https://coveralls.io/github/Non-Devs/gerencial-API?branch=master)
+[![codecov](https://codecov.io/gh/Non-Devs/gerencial-API/branch/master/graph/badge.svg)](https://codecov.io/gh/Non-Devs/gerencial-API)
 [![Build Status](https://travis-ci.org/Non-Devs/gerencial-API.svg?branch=master)](https://travis-ci.org/Non-Devs/gerencial-API)
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
 

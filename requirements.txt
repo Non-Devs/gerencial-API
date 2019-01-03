@@ -35,6 +35,7 @@ coveralls==1.5.1
 pytest==3.5.0  
 pytest-sugar==0.9.1
 pytest-cov==2.5.1
+codecov==2.0.15
 
 # Static and Media Storage
 django-storages==1.7.1

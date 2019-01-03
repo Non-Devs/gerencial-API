@@ -105,6 +105,7 @@ coverage: manage.py
 
 coverage-html: manage.py
 	# Create a covarege page based on the tests
+	sudo rm -rf htmlcov
 	sudo docker-compose -f ${file} run --rm ${container} coverage html
 
 coverage-report: manage.py
