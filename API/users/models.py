@@ -10,7 +10,32 @@ from rest_framework.authtoken.models import Token
 
 @python_2_unicode_compatible
 class User(AbstractUser):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
+
+    formation = models.CharField(
+        max_length=20,
+        default="",
+    )
+
+    gender_choices = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+
+    gender = models.CharField(
+        max_length=10,
+        choices=gender_choices,
+        default="",
+    )
+
+    birthday = models.DateField(
+        null=True,
+        blank=False,
+    )
 
     def __str__(self):
         return self.username

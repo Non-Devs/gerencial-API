@@ -25,3 +25,18 @@ class TestCreateUserSerializer(TestCase):
 
         user = serializer.save()
         ok_(check_password(self.user_data.get('password'), user.password))
+
+    def test_contains_expected_fields(self):
+        serializer = CreateUserSerializer(data=self.user_data)
+        serializer.is_valid()
+        data = serializer.data
+
+        self.assertEqual(set(data.keys()), set(['gender', 'birthday', 'formation', 'username',
+                                                'email', 'first_name', 'last_name']))
+
+    def test_gender_field_content(self):
+        serializer = CreateUserSerializer(data=self.user_data)
+        serializer.is_valid()
+        data = serializer.data
+
+        self.assertEqual(data['gender'], self.user_data['gender'])
