@@ -19,7 +19,8 @@ after_script:
 - if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation"
   ; ./mkdocs-build.sh ; echo "Completed deploying documentation" ; fi
 after_success:
-- docker-compose run --rm web codecov --token=$CODECOV_TOKEN
+- if [[ $TRAVIS_PULL_REQUEST == 'true' ]] || [[ "$TRAVIS_BRANCH" == "master" ]]; 
+  then docker-compose run --rm web codecov --token=$CODECOV_TOKEN; fi
 - if [ "$TRAVIS_BRANCH" == "master" ]; then if [ $TRAVIS_PULL_REQUEST == 'false' ];  then
   docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com; docker
   tag web registry.heroku.com/api-prod-gerencial/web; docker push registry.heroku.com/api-prod-gerencial/web;
