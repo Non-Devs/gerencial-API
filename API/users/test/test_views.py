@@ -31,6 +31,7 @@ class TestUserListTestCase(APITestCase):
         user = User.objects.get(pk=response.data.get('id'))
         eq_(user.username, self.user_data.get('username'))
         ok_(check_password(self.user_data.get('password'), user.password))
+        eq_(str(user), user.username)
 
 
 class TestUserDetailTestCase(APITestCase):
