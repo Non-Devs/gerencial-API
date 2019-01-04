@@ -5,8 +5,6 @@ services:
 python:
 - '3.6'
 before_install:
-- openssl aes-256-cbc -K $encrypted_194b131a019d_key -iv $encrypted_194b131a019d_iv
-  -in .coveralls.yml.enc -out .coveralls.yml -d
 - chmod +x mkdocs-build.sh
 before_script:
 - DEPLOY_DOCS="$(if [ $TRAVIS_BRANCH == 'master' ]; then if [ $TRAVIS_PULL_REQUEST
@@ -17,20 +15,16 @@ script:
 - docker-compose run --rm web bash -c "python wait_for_postgres.py && coverage run --source . -m py.test"
 after_script:
 - if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation"
-  ; ./mkdocs-build.sh ; echo "Completed deploying documentation" ; fi
+  ; ./mkdocs-build.sh ; echo "Completed deploying documentation" ; else echo 'Skipping documentation deploy'; fi
 after_success:
-- if [[ $TRAVIS_PULL_REQUEST == 'true' ]] || [[ "$TRAVIS_BRANCH" == "master" ]]; 
-  then docker-compose run --rm web codecov --token=$CODECOV_TOKEN; fi
-- if [ "$TRAVIS_BRANCH" == "master" ]; then if [ $TRAVIS_PULL_REQUEST == 'false' ];  then
+- if ([ $TRAVIS_BRANCH == 'master' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]) || ([ $TRAVIS_PULL_REQUEST != 'false' ] && [ $TRAVIS_BRANCH != 'master' ]);
+  then docker-compose run --rm web codecov --token=$CODECOV_TOKEN;
+  else echo 'Skipping codecov'; fi
+- if [ "$TRAVIS_BRANCH" == "master" ] ; then if [ $TRAVIS_PULL_REQUEST == 'false' ];  then
   docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com; docker
   tag web registry.heroku.com/api-prod-gerencial/web; docker push registry.heroku.com/api-prod-gerencial/web;
   bash ./heroku-container-release.sh api-prod-gerencial web $HEROKU_AUTH_TOKEN; docker-compose
-  run --rm web coveralls; fi; fi
-- if [ "$TRAVIS_BRANCH" == "qa" ]; then if [ $TRAVIS_PULL_REQUEST == 'false' ]; then
-  docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com; docker
-  tag web registry.heroku.com/api-qa/web; docker push registry.heroku.com/api-qa/web;
-  bash ./heroku-container-release.sh api-prod-gerencial web $HEROKU_AUTH_TOKEN; docker-compose
-  run --rm web coveralls; fi; fi
+  run --rm web coveralls;  fi; else echo 'Skipping Deploy step'; fi
 notifications:
   email: false
 cache:

@@ -41,9 +41,9 @@ class Common(Configuration):
     )
 
     ALLOWED_HOSTS = ["*"]
-    ROOT_URLCONF = 'API.urls'
+    ROOT_URLCONF = 'config.urls'
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-    WSGI_APPLICATION = 'API.wsgi.application'
+    WSGI_APPLICATION = 'config.wsgi.application'
 
     # Email
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -80,7 +80,7 @@ class Common(Configuration):
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     )
-    STATICFILES_STORAGE = 'API.config.storage.WhiteNoiseStaticFilesStorage'
+    STATICFILES_STORAGE = 'config.settings.storage.WhiteNoiseStaticFilesStorage'
 
     # Media files
     MEDIA_ROOT = join(os.path.dirname(BASE_DIR), 'media')
