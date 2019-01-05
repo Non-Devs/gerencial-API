@@ -6,38 +6,25 @@ class Students(models.Model):
 
     first_name = models.CharField(
         max_length=30,
-        blank=False,
-        null=True,
     )
 
     last_name = models.CharField(
         max_length=30,
-        blank=False,
-        null=True,
     )
 
     responsible_name = models.CharField(
         max_length=30,
-        blank=False,
-        null=True,
     )
 
     telephone = models.CharField(
-        blank=False,
-        null=True,
         max_length=14,
         # validators=[validate_phone],
     )
 
-    birthday = models.DateField(
-        blank=False,
-        null=True
-    )
+    birthday = models.DateField()
 
     school = models.CharField(
         max_length=50,
-        blank=False,
-        null=True,
     )
 
     grade_choices = (
@@ -58,13 +45,11 @@ class Students(models.Model):
 
     grade = models.CharField(
         choices=grade_choices,
-        blank=False,
         max_length=20,
-        null=True,
     )
 
     adress = models.TextField(
-        max_length=400
+        max_length=400,
     )
 
     subject_choices = (
@@ -79,9 +64,7 @@ class Students(models.Model):
 
     subject = models.CharField(
         choices=subject_choices,
-        blank=False,
         max_length=20,
-        null=True,
     )
 
     teacher = models.ForeignKey(
