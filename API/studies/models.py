@@ -51,8 +51,8 @@ class Students(models.Model):
         ('8f', '8º ano - fundamental'),
         ('9a', '9º ano - fundamental'),
         ('1em', '1º ano - médio'),
-        ('2em', '1º ano - médio'),
-        ('3em', '1º ano - médio'),
+        ('2em', '2º ano - médio'),
+        ('3em', '3º ano - médio'),
         ('others', 'Outro'),
     )
 

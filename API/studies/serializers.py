@@ -9,4 +9,3 @@ class StudentsSerializer(serializers.ModelSerializer):
         fields = ('id', 'first_name', 'last_name', 'responsible_name', 'telephone', 'birthday', 'school',
                   'grade', 'adress', 'subject', 'teacher',)
         read_only_fields = ('teacher', )
-        extra_kwargs = {'teacher': {'write_only': True}}

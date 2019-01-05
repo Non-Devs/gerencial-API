@@ -7,3 +7,6 @@ from . import serializers
 class StudentsViewset(viewsets.ModelViewSet):
     queryset = models.Students.objects.all()
     serializer_class = serializers.StudentsSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(teacher=self.request.user)
