@@ -12,6 +12,7 @@ pages:
   - API:
     - Authentication: 'api/authentication.md'
     - Users: 'api/users.md'
+    - Students: 'api/students.md'
   - Documentação: 
     - Documento de visão: 'documentation/doc_visao.md'
     - Contribuindo: 'documentation/contrib.md'
