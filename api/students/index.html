@@ -38,7 +38,7 @@
     
     
       
-        <title>Users - API</title>
+        <title>Students - API</title>
       
     
     
@@ -93,7 +93,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#users" tabindex="1" class="md-skip">
+      <a href="#students" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -119,7 +119,7 @@
                 API
               </span>
               <span class="md-header-nav__topic">
-                Users
+                Students
               </span>
             
           
@@ -279,6 +279,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../users/" title="Users" class="md-nav__link">
+      Users
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -290,11 +302,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Users
+        Students
       </label>
     
-    <a href="./" title="Users" class="md-nav__link md-nav__link--active">
-      Users
+    <a href="./" title="Students" class="md-nav__link md-nav__link--active">
+      Students
     </a>
     
       
@@ -308,22 +320,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#register-a-new-user-account" title="Register a new user account" class="md-nav__link">
-    Register a new user account
+  <a href="#register-a-new-student" title="Register a new student" class="md-nav__link">
+    Register a new student
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-users-profile-information" title="Get a user's profile information" class="md-nav__link">
-    Get a user's profile information
+  <a href="#get-a-students-information" title="Get a student's information" class="md-nav__link">
+    Get a student's information
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#update-your-profile-information" title="Update your profile information" class="md-nav__link">
-    Update your profile information
+  <a href="#update-studentss-information" title="Update students's information" class="md-nav__link">
+    Update students's information
   </a>
   
 </li>
@@ -336,18 +348,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../students/" title="Students" class="md-nav__link">
-      Students
-    </a>
   </li>
 
         
@@ -425,22 +425,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#register-a-new-user-account" title="Register a new user account" class="md-nav__link">
-    Register a new user account
+  <a href="#register-a-new-student" title="Register a new student" class="md-nav__link">
+    Register a new student
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-a-users-profile-information" title="Get a user's profile information" class="md-nav__link">
-    Get a user's profile information
+  <a href="#get-a-students-information" title="Get a student's information" class="md-nav__link">
+    Get a student's information
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#update-your-profile-information" title="Update your profile information" class="md-nav__link">
-    Update your profile information
+  <a href="#update-studentss-information" title="Update students's information" class="md-nav__link">
+    Update students's information
   </a>
   
 </li>
@@ -461,14 +461,14 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/Non-Devs/gerencial-API/edit/master/docs/api/users.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/Non-Devs/gerencial-API/edit/master/docs/api/students.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="users">Users</h1>
+                <h1 id="students">Students</h1>
 <p>Supports registering, viewing, and updating user accounts.</p>
-<h2 id="register-a-new-user-account">Register a new user account</h2>
+<h2 id="register-a-new-student">Register a new student</h2>
 <p><strong>Request</strong>:</p>
-<p><code>POST</code> <code>/users/</code></p>
+<p><code>POST</code> <code>/students/</code></p>
 <p>Parameters:</p>
 <table>
 <thead>
@@ -481,52 +481,58 @@
 </thead>
 <tbody>
 <tr>
-<td>username</td>
-<td>string</td>
-<td>Yes</td>
-<td>The username for the new user.</td>
-</tr>
-<tr>
-<td>password</td>
-<td>string</td>
-<td>Yes</td>
-<td>The password for the new user account.</td>
-</tr>
-<tr>
 <td>first_name</td>
 <td>string</td>
-<td>No</td>
-<td>The user's given name.</td>
+<td>Yes</td>
+<td>The first name for the new student.</td>
 </tr>
 <tr>
 <td>last_name</td>
 <td>string</td>
-<td>No</td>
-<td>The user's family name.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>string</td>
-<td>No</td>
-<td>The user's email address.</td>
-</tr>
-<tr>
-<td>gender</td>
-<td>choice</td>
 <td>Yes</td>
-<td>The user's gender.</td>
+<td>The last name for the new student.</td>
 </tr>
 <tr>
-<td>formation</td>
+<td>responsible_name</td>
 <td>string</td>
 <td>Yes</td>
-<td>The user's formation.</td>
+<td>The responsible name for the new student.</td>
+</tr>
+<tr>
+<td>telephone</td>
+<td>string</td>
+<td>Yes</td>
+<td>The responsible or student telephone number.</td>
 </tr>
 <tr>
 <td>birthday</td>
 <td>date</td>
 <td>Yes</td>
-<td>The user's birthday.</td>
+<td>The student's birthday.</td>
+</tr>
+<tr>
+<td>school</td>
+<td>string</td>
+<td>Yes</td>
+<td>The school of the new student.</td>
+</tr>
+<tr>
+<td>grade</td>
+<td>choice</td>
+<td>Yes</td>
+<td>The grade of the new student.</td>
+</tr>
+<tr>
+<td>adress</td>
+<td>text</td>
+<td>Yes</td>
+<td>The adress of the responsible or student.</td>
+</tr>
+<tr>
+<td>subject</td>
+<td>choice</td>
+<td>Yes</td>
+<td>The school subject of the new student.</td>
 </tr>
 </tbody>
 </table>
@@ -539,23 +545,35 @@
 201 Created
 
 {
-  &quot;id&quot;: &quot;6d5f9bae-a31b-4b7b-82c4-3853eda2b011&quot;,
-  &quot;username&quot;: &quot;richard&quot;,
-  &quot;first_name&quot;: &quot;Richard&quot;,
-  &quot;last_name&quot;: &quot;Hendriks&quot;,
-  &quot;email&quot;: &quot;richard@piedpiper.com&quot;,
-  &quot;birthday&quot;: &quot;2000-10-10&quot;,
-  &quot;gender&quot;: &quot;M&quot;,
-  &quot;formation&quot;: &quot;teacher&quot;,
-  &quot;auth_token&quot;: &quot;132cf952e0165a274bf99e115ab483671b3d9ff6&quot;
+  &quot;id&quot;:1,
+  &quot;first_name&quot;:&quot;Joao&quot;,
+  &quot;last_name&quot;:&quot;das Neves&quot;,
+  &quot;responsible_name&quot;:&quot;Ned&quot;,
+  &quot;telephone&quot;:&quot;992789954&quot;,
+  &quot;birthday&quot;:&quot;2000-11-11&quot;,
+  &quot;school&quot;:&quot;Stella&quot;,
+  &quot;grade&quot;:&quot;1em&quot;,
+  &quot;adress&quot;:&quot;Sla&quot;,
+  &quot;subject&quot;:&quot;geo&quot;,
+  &quot;teacher&quot;:&quot;8a34e9f2-bc76-4b82-9200-81db8dcec579&quot;
 }
+
 </code></pre>
 
-<p>The <code>auth_token</code> returned with this response should be stored by the client for
-authenticating future requests to the API. See <a href="../authentication/">Authentication</a>.</p>
-<h2 id="get-a-users-profile-information">Get a user's profile information</h2>
+<p><strong>Example</strong>:</p>
+<pre><code class="bash">curl -X POST --data &quot;first_name=Joao&amp;last_name=das Neves&amp;responsible_name=Ned&amp;telephone=992789954&amp;birthday=2000-11-11&amp;school=Stella&amp;grade=1em&amp;adress=Sla&amp;subject=geo&quot; http://0.0.0.0:8000/api/v1/students/ -H 'Authorization: Token 5e4968a343905bcb78e62285e8ce74cdbcb7addd'
+</code></pre>
+
+<p>Response:</p>
+<pre><code class="bash">{&quot;id&quot;:1,&quot;first_name&quot;:&quot;Joao&quot;,&quot;last_name&quot;:&quot;das Neves&quot;,&quot;responsible_name&quot;:&quot;Ned&quot;,
+&quot;telephone&quot;:&quot;992789954&quot;,&quot;birthday&quot;:&quot;2000-11-11&quot;,&quot;school&quot;:&quot;Stella&quot;,&quot;grade&quot;:&quot;1em&quot;,
+&quot;adress&quot;:&quot;Sla&quot;,&quot;subject&quot;:&quot;geo&quot;,&quot;teacher&quot;:&quot;8a34e9f2-bc76-4b82-9200-81db8dcec579&quot;}
+</code></pre>
+
+<p>The <code>teacher</code> returned with this response is the user id that registered the student. It is filled automatically.</p>
+<h2 id="get-a-students-information">Get a student's information</h2>
 <p><strong>Request</strong>:</p>
-<p><code>GET</code> <code>/users/:id/</code></p>
+<p><code>GET</code> <code>/students/:id/</code></p>
 <p>Parameters:</p>
 <p><em>Note:</em></p>
 <ul>
@@ -566,19 +584,34 @@ authenticating future requests to the API. See <a href="../authentication/">Auth
 200 OK
 
 {
-  &quot;id&quot;: &quot;6d5f9bae-a31b-4b7b-82c4-3853eda2b011&quot;,
-  &quot;username&quot;: &quot;richard&quot;,
-  &quot;first_name&quot;: &quot;Richard&quot;,
-  &quot;last_name&quot;: &quot;Hendriks&quot;,
-  &quot;birthday&quot;: &quot;2000-10-10&quot;,
-  &quot;gender&quot;: &quot;M&quot;,
-  &quot;formation&quot;: &quot;teacher&quot;,
+  &quot;id&quot;:1,
+  &quot;first_name&quot;:&quot;Joao&quot;,
+  &quot;last_name&quot;:&quot;das Neves&quot;,
+  &quot;responsible_name&quot;:&quot;Ned&quot;,
+  &quot;telephone&quot;:&quot;992789954&quot;,
+  &quot;birthday&quot;:&quot;2000-11-11&quot;,
+  &quot;school&quot;:&quot;Stella&quot;,
+  &quot;grade&quot;:&quot;1em&quot;,
+  &quot;adress&quot;:&quot;Sla&quot;,
+  &quot;subject&quot;:&quot;geo&quot;,
+  &quot;teacher&quot;:&quot;8a34e9f2-bc76-4b82-9200-81db8dcec579&quot;
 }
+
 </code></pre>
 
-<h2 id="update-your-profile-information">Update your profile information</h2>
+<p><strong>Example</strong></p>
+<pre><code class="bash">curl -X GET  http://0.0.0.0:8000/api/v1/students/1/ -H 'Authorization: Token 5e4968a343905bcb78e62285e8ce74cdbcb7addd'
+</code></pre>
+
+<p>Response:</p>
+<pre><code class="bash">{&quot;id&quot;:1,&quot;first_name&quot;:&quot;Joao&quot;,&quot;last_name&quot;:&quot;das Neves&quot;,&quot;responsible_name&quot;:&quot;Ned&quot;,&quot;telephone&quot;:&quot;992789954&quot;,
+&quot;birthday&quot;:&quot;2000-11-11&quot;,&quot;school&quot;:&quot;Stella&quot;,&quot;grade&quot;:&quot;1em&quot;,&quot;adress&quot;:&quot;Sla&quot;,&quot;subject&quot;:&quot;geo&quot;,
+&quot;teacher&quot;:&quot;8a34e9f2-bc76-4b82-9200-81db8dcec579&quot;}
+</code></pre>
+
+<h2 id="update-studentss-information">Update students's information</h2>
 <p><strong>Request</strong>:</p>
-<p><code>PUT/PATCH</code> <code>/users/:id</code></p>
+<p><code>PUT/PATCH</code> <code>/students/:id</code></p>
 <p>Parameters:</p>
 <table>
 <thead>
@@ -592,32 +625,47 @@ authenticating future requests to the API. See <a href="../authentication/">Auth
 <tr>
 <td>first_name</td>
 <td>string</td>
-<td>The first_name of the user object.</td>
+<td>The first name for the new student.</td>
 </tr>
 <tr>
 <td>last_name</td>
 <td>string</td>
-<td>The last_name of the user object.</td>
+<td>The last name for the new student.</td>
 </tr>
 <tr>
-<td>email</td>
+<td>responsible_name</td>
 <td>string</td>
-<td>The user's email address.</td>
+<td>The responsible name for the new student.</td>
 </tr>
 <tr>
-<td>gender</td>
-<td>choice</td>
-<td>The user's gender.</td>
-</tr>
-<tr>
-<td>formation</td>
+<td>telephone</td>
 <td>string</td>
-<td>The user's formation.</td>
+<td>The responsible or student telephone number.</td>
 </tr>
 <tr>
 <td>birthday</td>
 <td>date</td>
-<td>The user's birthday.</td>
+<td>The student's birthday.</td>
+</tr>
+<tr>
+<td>school</td>
+<td>string</td>
+<td>The school of the new student.</td>
+</tr>
+<tr>
+<td>grade</td>
+<td>choice</td>
+<td>The grade of the new student.</td>
+</tr>
+<tr>
+<td>adress</td>
+<td>text</td>
+<td>The adress of the responsible or student.</td>
+</tr>
+<tr>
+<td>subject</td>
+<td>choice</td>
+<td>The school subject of the new student.</td>
 </tr>
 </tbody>
 </table>
@@ -631,13 +679,17 @@ authenticating future requests to the API. See <a href="../authentication/">Auth
 200 OK
 
 {
-  &quot;id&quot;: &quot;6d5f9bae-a31b-4b7b-82c4-3853eda2b011&quot;,
-  &quot;username&quot;: &quot;richard&quot;,
-  &quot;first_name&quot;: &quot;Richard&quot;,
-  &quot;last_name&quot;: &quot;Hendriks&quot;,
-  &quot;birthday&quot;: &quot;2000-10-10&quot;,
-  &quot;gender&quot;: &quot;M&quot;,
-  &quot;formation&quot;: &quot;teacher&quot;,
+  &quot;id&quot;:1,
+  &quot;first_name&quot;:&quot;Joao&quot;,
+  &quot;last_name&quot;:&quot;das Neves&quot;,
+  &quot;responsible_name&quot;:&quot;Ned&quot;,
+  &quot;telephone&quot;:&quot;992789954&quot;,
+  &quot;birthday&quot;:&quot;2000-11-11&quot;,
+  &quot;school&quot;:&quot;Stella&quot;,
+  &quot;grade&quot;:&quot;1em&quot;,
+  &quot;adress&quot;:&quot;Sla&quot;,
+  &quot;subject&quot;:&quot;geo&quot;,
+  &quot;teacher&quot;:&quot;8a34e9f2-bc76-4b82-9200-81db8dcec579&quot;
 }
 </code></pre>
                 
@@ -660,7 +712,7 @@ authenticating future requests to the API. See <a href="../authentication/">Auth
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../authentication/" title="Authentication" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../users/" title="Users" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -669,19 +721,19 @@ authenticating future requests to the API. See <a href="../authentication/">Auth
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Authentication
+                Users
               </span>
             </div>
           </a>
         
         
-          <a href="../students/" title="Students" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../documentation/doc_visao/" title="Documento de visão" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Students
+                Documento de visão
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
