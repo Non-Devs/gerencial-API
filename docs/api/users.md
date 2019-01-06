@@ -16,6 +16,10 @@ password   | string | Yes      | The password for the new user account.
 first_name | string | No       | The user's given name.
 last_name  | string | No       | The user's family name.
 email      | string | No       | The user's email address.
+gender     | choice | Yes      | The user's gender.
+formation  | string | Yes      | The user's formation.
+birthday   | date   | Yes      | The user's birthday.
+
 
 *Note:*
 
@@ -33,6 +37,9 @@ Content-Type application/json
   "first_name": "Richard",
   "last_name": "Hendriks",
   "email": "richard@piedpiper.com",
+  "birthday": "2000-10-10",
+  "gender": "M",
+  "formation": "teacher",
   "auth_token": "132cf952e0165a274bf99e115ab483671b3d9ff6"
 }
 ```
@@ -45,7 +52,7 @@ authenticating future requests to the API. See [Authentication](authentication.m
 
 **Request**:
 
-`GET` `/users/:id`
+`GET` `/users/:id/`
 
 Parameters:
 
@@ -64,7 +71,9 @@ Content-Type application/json
   "username": "richard",
   "first_name": "Richard",
   "last_name": "Hendriks",
-  "email": "richard@piedpiper.com",
+  "birthday": "2000-10-10",
+  "gender": "M",
+  "formation": "teacher",
 }
 ```
 
@@ -82,7 +91,9 @@ Name       | Type   | Description
 first_name | string | The first_name of the user object.
 last_name  | string | The last_name of the user object.
 email      | string | The user's email address.
-
+gender     | choice | The user's gender.
+formation  | string | The user's formation.
+birthday   | date   | The user's birthday.
 
 
 *Note:*
@@ -101,6 +112,8 @@ Content-Type application/json
   "username": "richard",
   "first_name": "Richard",
   "last_name": "Hendriks",
-  "email": "richard@piedpiper.com",
+  "birthday": "2000-10-10",
+  "gender": "M",
+  "formation": "teacher",
 }
 ```

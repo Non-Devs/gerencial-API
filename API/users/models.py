@@ -18,7 +18,6 @@ class User(AbstractUser):
 
     formation = models.CharField(
         max_length=20,
-        default="",
     )
 
     gender_choices = (
@@ -29,12 +28,11 @@ class User(AbstractUser):
     gender = models.CharField(
         max_length=10,
         choices=gender_choices,
-        default="",
     )
 
     birthday = models.DateField(
-        null=True,
         blank=False,
+        null=True,
     )
 
     def __str__(self):

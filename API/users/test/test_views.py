@@ -50,7 +50,11 @@ class TestUserDetailTestCase(APITestCase):
 
     def test_put_request_updates_a_user(self):
         new_first_name = fake.first_name()
-        payload = {'first_name': new_first_name}
+        birthday = '2000-10-10'
+        gender = 'M'
+        formation = 'teacher'
+        payload = {'first_name': new_first_name, 'birthday': birthday,
+                   'gender': gender, 'formation': formation}
         response = self.client.put(self.url, payload)
         eq_(response.status_code, status.HTTP_200_OK)
 
