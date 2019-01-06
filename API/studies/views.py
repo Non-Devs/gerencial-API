@@ -13,6 +13,8 @@ class StudentsViewSet(mixins.RetrieveModelMixin,
     """
     queryset = Students.objects.all()
     serializer_class = StudentsSerializer
+    # Verificar sobre essa permissão, pois não está permitindo um usuário editar 
+    # o que ele mesmo criou
     permission_classes = (IsUserOrReadOnly,)
 
 
