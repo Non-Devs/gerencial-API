@@ -72,3 +72,25 @@ class Students(models.Model):
         related_name='teacher',
         on_delete=models.CASCADE,
     )
+
+    def __str__(self):
+        return self.first_name
+
+
+class Lesson(models.Model):
+
+    student = models.ForeignKey(
+        Students,
+        related_name='student',
+        on_delete=models.CASCADE,
+    )
+
+    hour = models.TimeField()
+
+    # In minutes
+    duration = models.IntegerField()
+
+    # In hour/class
+    value = models.IntegerField()
+
+    final_hour = models.TimeField()

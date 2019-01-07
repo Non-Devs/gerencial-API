@@ -44,3 +44,4 @@ class TestUserListTestCase(APITestCase):
 
         student = Students.objects.get(pk=response.data.get('id'))
         eq_(student.teacher, self.user)
+        eq_(str(student), student.first_name)
