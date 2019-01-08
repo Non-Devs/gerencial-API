@@ -52,3 +52,49 @@ class TestUserListTestCase(APITestCase):
 
         lesson = Lesson.objects.get(pk=response.data.get('id'))
 
+
+class TestLessonDetailTestCase(APITestCase):
+    """
+    Tests /lesson detail operations.
+    """
+
+    def setUp(self):
+        self.user1 = User.objects.create_user(
+            username='Teste',
+            password='12d34d56f78',
+            birthday='2000-11-11',
+        )
+        self.student1 = Students.objects.create(
+            first_name='Joao',
+            last_name='das Neves',
+            responsible_name='Ned',
+            telephone='992789954',
+            birthday='2000-11-11',
+            school='Stella',
+            grade='1em',
+            adress='Sla',
+            subject='geo',
+            teacher=self.user1,
+        )
+        self.lesson = Lesson.objects.create(
+            student=self.student1,
+            hour='10:10:10',
+            duration='10',
+            value='10',
+            final_hour='10:10:10',
+        )
+        self.url = reverse('lesson-detail', kwargs={'pk': self.lesson.pk})
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.user1.auth_token}')
+
+    def test_put_request_updates_a_lesson(self):
+        hour = "15:02:00"
+        duration = 20
+        value = 15
+        payload = {
+                    "student": self.student1.pk,
+                    "hour": hour,
+                    "duration": duration,
+                    "value": value,
+                   }
+        response = self.client.put(self.url, payload)
+        eq_(response.status_code, status.HTTP_200_OK)
