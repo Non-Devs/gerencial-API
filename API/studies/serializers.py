@@ -57,3 +57,8 @@ class LessonSerializer(serializers.ModelSerializer):
             self.instance = Lesson.objects.create(**validated_data, final_hour=fhour.time())
 
         return self.instance
+
+    def __init__(self, *args, **kwargs):
+        super(LessonSerializer, self).__init__(*args, **kwargs)
+        request_user = self.context['request'].user
+        self.fields['student'].queryset = Students.objects.filter(teacher=request_user)
