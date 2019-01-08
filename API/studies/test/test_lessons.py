@@ -37,20 +37,31 @@ class TestUserListTestCase(APITestCase):
             teacher=self.user,
         )
 
+    def test_post_request_with_lesson_data_succeeds(self):
+
         self.lesson_data = ({
-            'student': '1',
+            'student': self.student.pk,
             'hour': '10:10:10',
             'duration': '10',
             'value': '10'
         })
 
-    def test_post_request_with_valid_data_succeeds(self):
-
         self.client.force_authenticate(self.user)
         response = self.client.post(self.url, self.lesson_data)
         eq_(response.status_code, status.HTTP_201_CREATED)
 
-        lesson = Lesson.objects.get(pk=response.data.get('id'))
+    def test_post_request_with_lesson_data2_succeeds(self):
+
+        self.lesson_data2 = ({
+            'student': self.student.pk,
+            'hour': '08:00:10',
+            'duration': '70',
+            'value': '10'
+        })
+
+        self.client.force_authenticate(self.user)
+        response = self.client.post(self.url, self.lesson_data2)
+        eq_(response.status_code, status.HTTP_201_CREATED)
 
 
 class TestLessonDetailTestCase(APITestCase):
@@ -86,9 +97,22 @@ class TestLessonDetailTestCase(APITestCase):
         self.url = reverse('lesson-detail', kwargs={'pk': self.lesson.pk})
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.user1.auth_token}')
 
-    def test_put_request_updates_a_lesson(self):
+    def test_put_request_updates_a_lesson_less_than_1h(self):
         hour = "15:02:00"
         duration = 20
+        value = 15
+        payload = {
+                    "student": self.student1.pk,
+                    "hour": hour,
+                    "duration": duration,
+                    "value": value,
+                   }
+        response = self.client.put(self.url, payload)
+        eq_(response.status_code, status.HTTP_200_OK)
+
+    def test_put_request_updates_a_lesson_more_than_1h(self):
+        hour = "15:02:00"
+        duration = 75
         value = 15
         payload = {
                     "student": self.student1.pk,

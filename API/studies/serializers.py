@@ -15,15 +15,13 @@ class StudentsSerializer(serializers.ModelSerializer):
 
 class LessonSerializer(serializers.ModelSerializer):
 
-
-
     class Meta:
         model = Lesson
         fields = ('id', 'student', 'hour', 'duration', 'value', 'final_hour')
         read_only_fields = ('final_hour', )
 
     def save(self, **kwargs):
-        
+
         validated_data = dict(
             list(self.validated_data.items()) +
             list(kwargs.items())
@@ -31,8 +29,31 @@ class LessonSerializer(serializers.ModelSerializer):
 
         if self.instance is not None:
             self.instance = self.update(self.instance, validated_data)
-            self.instance.final_hour = self.initial_data['hour']
+            hour = self.initial_data['hour'][:5]
+            datetime_hour = datetime.datetime.strptime(str(hour), '%H:%M')
+            duration = int(float(self.initial_data['duration']))
+
+            if duration > 60:
+                fhhour = duration//60
+                duration = duration % 60
+            else:
+                fhhour = 0
+
+            fhour = datetime_hour + datetime.timedelta(minutes=duration) + datetime.timedelta(hours=fhhour)
+            self.instance.final_hour = fhour.time()
         else:
-            self.instance = Lesson.objects.create(**validated_data, final_hour=self.initial_data['hour'])
+            hour = self.initial_data['hour'][:5]
+            datetime_hour = datetime.datetime.strptime(str(hour), '%H:%M')
+            duration = int(float(self.initial_data['duration']))
+
+            if duration > 60:
+                fhhour = duration//60
+                duration = duration % 60
+            else:
+                fhhour = 0
+
+            fhour = datetime_hour + datetime.timedelta(minutes=duration) + datetime.timedelta(hours=fhhour)
+            print(fhour)
+            self.instance = Lesson.objects.create(**validated_data, final_hour=fhour.time())
 
         return self.instance
