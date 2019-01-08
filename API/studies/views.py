@@ -2,8 +2,9 @@ from rest_framework import viewsets, mixins
 from rest_framework.permissions import AllowAny
 from .models import Students, Lesson
 from .serializers import StudentsSerializer, LessonSerializer
-from API.users.permissions import IsUserOrReadOnly
+from .permissions import IsOwnerStudents, IsOwnerLesson
 import datetime
+
 
 class StudentsViewSet(mixins.RetrieveModelMixin,
                       mixins.UpdateModelMixin,
@@ -13,9 +14,7 @@ class StudentsViewSet(mixins.RetrieveModelMixin,
     """
     queryset = Students.objects.all()
     serializer_class = StudentsSerializer
-    # Verificar sobre essa permissão, pois não está permitindo um usuário editar 
-    # o que ele mesmo criou
-    permission_classes = (IsUserOrReadOnly,)
+    permission_classes = (IsOwnerStudents,)
 
 
 class StudentsCreateViewSet(mixins.CreateModelMixin,
@@ -41,7 +40,7 @@ class LessonViewSet(mixins.RetrieveModelMixin,
     serializer_class = LessonSerializer
     # Verificar sobre essa permissão, pois não está permitindo um usuário editar 
     # o que ele mesmo criou
-    permission_classes = (IsUserOrReadOnly,)
+    permission_classes = (IsOwnerLesson,)
 
 
 class LessonCreateViewSet(mixins.CreateModelMixin,
