@@ -1,6 +1,6 @@
 from django.db import models
 from API.users.models import User
-
+from multiselectfield import MultiSelectField
 
 class Students(models.Model):
 
@@ -94,3 +94,19 @@ class Lesson(models.Model):
     value = models.IntegerField()
 
     final_hour = models.TimeField()
+
+    DAYS_OF_WEEK = (
+        ('dom', 'Domingo'),
+        ('seg', 'Segunda-feira'),
+        ('ter', 'Terça-feira'),
+        ('qua', 'Quarta-feira'),
+        ('qui', 'Quinta-feira'),
+        ('sex', 'Sexta-feira'),
+        ('sab', 'Sábado'),
+    )
+
+    weekdays = MultiSelectField(
+        choices=DAYS_OF_WEEK,
+        max_choices=5,
+        max_length=30,
+    )

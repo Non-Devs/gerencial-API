@@ -3,7 +3,6 @@ from .models import Students, Lesson
 import datetime
 from dateutil.relativedelta import relativedelta
 
-
 class StudentsSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -15,9 +14,13 @@ class StudentsSerializer(serializers.ModelSerializer):
 
 class LessonSerializer(serializers.ModelSerializer):
 
+    weekdays = serializers.MultipleChoiceField(
+        choices=Lesson.DAYS_OF_WEEK,
+    )
+
     class Meta:
         model = Lesson
-        fields = ('id', 'student', 'hour', 'duration', 'value', 'final_hour')
+        fields = ('id', 'student', 'hour', 'duration', 'value', 'weekdays', 'final_hour')
         read_only_fields = ('final_hour', )
 
     def save(self, **kwargs):
