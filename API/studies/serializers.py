@@ -56,10 +56,16 @@ class LessonSerializer(serializers.ModelSerializer):
                 fhhour = 0
 
             fhour = datetime_hour + datetime.timedelta(minutes=duration) + datetime.timedelta(hours=fhhour)
-            print(fhour)
             self.instance = Lesson.objects.create(**validated_data, final_hour=fhour.time())
 
         return self.instance
+
+    def validate(self, data):
+        if len(data['weekdays']) is 0:
+            raise serializers.ValidationError("You need to choose at least 1 day")
+        elif len(data['weekdays']) > 5:
+            raise serializers.ValidationError("The maximum of possible days is 5!")
+        return data
 
     def __init__(self, *args, **kwargs):
         super(LessonSerializer, self).__init__(*args, **kwargs)

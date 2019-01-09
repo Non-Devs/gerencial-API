@@ -43,7 +43,8 @@ class TestUserListTestCase(APITestCase):
             'student': self.student.pk,
             'hour': '10:10:10',
             'duration': '10',
-            'value': '10'
+            'value': '10',
+            'weekdays': ['seg', 'qua'],
         })
 
         self.client.force_authenticate(self.user)
@@ -56,12 +57,41 @@ class TestUserListTestCase(APITestCase):
             'student': self.student.pk,
             'hour': '08:00:10',
             'duration': '70',
-            'value': '10'
+            'value': '10',
+            'weekdays': ['seg','qua'],
         })
 
         self.client.force_authenticate(self.user)
         response = self.client.post(self.url, self.lesson_data2)
         eq_(response.status_code, status.HTTP_201_CREATED)
+
+    def test_post_request_with_no_weekdays(self):
+
+        self.lesson_data3 = ({
+            'student': self.student.pk,
+            'hour': '08:00:10',
+            'duration': '70',
+            'value': '10',
+            'weekdays': [],
+        })
+
+        self.client.force_authenticate(self.user)
+        response = self.client.post(self.url, self.lesson_data3)
+        eq_(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_post_request_with_more_than_5_weekdays(self):
+
+        self.lesson_data4 = ({
+            'student': self.student.pk,
+            'hour': '08:00:10',
+            'duration': '70',
+            'value': '10',
+            'weekdays': ['seg', 'ter', 'qua', 'qui', 'sex', 'sab'],
+        })
+
+        self.client.force_authenticate(self.user)
+        response = self.client.post(self.url, self.lesson_data4)
+        eq_(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
 class TestLessonDetailTestCase(APITestCase):
@@ -93,6 +123,7 @@ class TestLessonDetailTestCase(APITestCase):
             duration='10',
             value='10',
             final_hour='10:10:10',
+            weekdays=['seg', 'qua'],
         )
         self.url = reverse('lesson-detail', kwargs={'pk': self.lesson.pk})
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.user1.auth_token}')
@@ -101,11 +132,13 @@ class TestLessonDetailTestCase(APITestCase):
         hour = "15:02:00"
         duration = 20
         value = 15
+        weekdays = ['seg', 'qua']
         payload = {
                     "student": self.student1.pk,
                     "hour": hour,
                     "duration": duration,
                     "value": value,
+                    "weekdays": weekdays,
                    }
         response = self.client.put(self.url, payload)
         eq_(response.status_code, status.HTTP_200_OK)
@@ -114,11 +147,13 @@ class TestLessonDetailTestCase(APITestCase):
         hour = "15:02:00"
         duration = 75
         value = 15
+        weekdays = ['seg', 'qua']
         payload = {
                     "student": self.student1.pk,
                     "hour": hour,
                     "duration": duration,
                     "value": value,
+                    "weekdays": weekdays,
                    }
         response = self.client.put(self.url, payload)
         eq_(response.status_code, status.HTTP_200_OK)
