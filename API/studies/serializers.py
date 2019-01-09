@@ -32,31 +32,18 @@ class LessonSerializer(serializers.ModelSerializer):
 
         if self.instance is not None:
             self.instance = self.update(self.instance, validated_data)
-            hour = self.initial_data['hour'][:5]
-            datetime_hour = datetime.datetime.strptime(str(hour), '%H:%M')
-            duration = int(float(self.initial_data['duration']))
-
-            if duration > 60:
-                fhhour = duration//60
-                duration = duration % 60
-            else:
-                fhhour = 0
-
-            fhour = datetime_hour + datetime.timedelta(minutes=duration) + datetime.timedelta(hours=fhhour)
-            self.instance.final_hour = fhour.time()
+            self.instance.final_hour = self.determine_final_hour(
+                self.initial_data['hour'][:5],
+                self.initial_data['duration']
+            ).time()
         else:
-            hour = self.initial_data['hour'][:5]
-            datetime_hour = datetime.datetime.strptime(str(hour), '%H:%M')
-            duration = int(float(self.initial_data['duration']))
-
-            if duration > 60:
-                fhhour = duration//60
-                duration = duration % 60
-            else:
-                fhhour = 0
-
-            fhour = datetime_hour + datetime.timedelta(minutes=duration) + datetime.timedelta(hours=fhhour)
-            self.instance = Lesson.objects.create(**validated_data, final_hour=fhour.time())
+            self.instance = Lesson.objects.create(
+                **validated_data, 
+                final_hour=self.determine_final_hour(
+                    self.initial_data['hour'][:5],
+                    self.initial_data['duration']
+                ).time()
+            )
 
         return self.instance
 
@@ -66,6 +53,21 @@ class LessonSerializer(serializers.ModelSerializer):
         elif len(data['weekdays']) > 5:
             raise serializers.ValidationError("The maximum of possible days is 5!")
         return data
+
+    def determine_final_hour(self, hour, duration):
+        hour = hour
+        datetime_hour = datetime.datetime.strptime(str(hour), '%H:%M')
+        duration = int(float(duration))
+
+        if duration > 60:
+            fhhour = duration//60
+            duration = duration % 60
+        else:
+            fhhour = 0
+
+        fhour = datetime_hour + datetime.timedelta(minutes=duration) + datetime.timedelta(hours=fhhour)
+
+        return fhour
 
     def __init__(self, *args, **kwargs):
         super(LessonSerializer, self).__init__(*args, **kwargs)
