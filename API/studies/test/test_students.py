@@ -22,7 +22,7 @@ class TestUserListTestCase(APITestCase):
         self.user = User.objects.create_user(
             username='Teste',
             password='12d34d56f78',
-            birthday='2000-11-11'
+            birthday='2000-11-11',
         )
         self.user2 = User.objects.create_user(
             username='Teste2',
@@ -50,6 +50,12 @@ class TestUserListTestCase(APITestCase):
         student = Students.objects.get(pk=response.data.get('id'))
         eq_(student.teacher, self.user)
         eq_(str(student), student.first_name)
+
+    def test_get_request_with_valid_data_succeeds(self):
+
+        self.client.force_authenticate(self.user)
+        response = self.client.get(self.url)
+        eq_(response.status_code, status.HTTP_200_OK)
 
     def test_get_request_with_invalid(self):
         self.student = Students.objects.create(

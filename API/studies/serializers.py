@@ -47,12 +47,12 @@ class LessonSerializer(serializers.ModelSerializer):
 
         return self.instance
 
-    def validate(self, data):
-        if len(data['weekdays']) is 0:
+    def validate_weekdays(self, value):
+        if len(value) is 0:
             raise serializers.ValidationError("You need to choose at least 1 day")
-        elif len(data['weekdays']) > 5:
+        elif len(value) > 5:
             raise serializers.ValidationError("The maximum of possible days is 5!")
-        return data
+        return value
 
     def determine_final_hour(self, hour, duration):
         hour = hour

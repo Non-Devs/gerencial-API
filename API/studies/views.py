@@ -18,6 +18,7 @@ class StudentsViewSet(mixins.RetrieveModelMixin,
 
 
 class StudentsCreateViewSet(mixins.CreateModelMixin,
+                            mixins.ListModelMixin,
                             viewsets.GenericViewSet):
     """
     Creates students
@@ -25,9 +26,13 @@ class StudentsCreateViewSet(mixins.CreateModelMixin,
     queryset = Students.objects.all()
     serializer_class = StudentsSerializer
     permission_classes = (AllowAny,)
+    pagination_class = None
 
     def perform_create(self, serializer):
         serializer.save(teacher=self.request.user)
+
+    def get_queryset(self):
+        return Students.objects.filter(teacher=self.request.user)
 
 
 class LessonViewSet(mixins.RetrieveModelMixin,
@@ -38,12 +43,11 @@ class LessonViewSet(mixins.RetrieveModelMixin,
     """
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
-    # Verificar sobre essa permissão, pois não está permitindo um usuário editar 
-    # o que ele mesmo criou
     permission_classes = (IsOwnerLesson,)
 
 
 class LessonCreateViewSet(mixins.CreateModelMixin,
+                          mixins.ListModelMixin,
                           viewsets.GenericViewSet):
     """
     Creates lessons
@@ -51,3 +55,7 @@ class LessonCreateViewSet(mixins.CreateModelMixin,
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = (AllowAny,)
+    pagination_class = None
+
+    def get_queryset(self):
+        return Lesson.objects.filter(student__teacher=self.request.user)

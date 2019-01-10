@@ -93,6 +93,10 @@ class TestUserListTestCase(APITestCase):
         response = self.client.post(self.url, self.lesson_data4)
         eq_(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_get_request(self):
+        self.client.force_authenticate(self.user)
+        response = self.client.get(self.url)
+        eq_(response.status_code, status.HTTP_200_OK)
 
 class TestLessonDetailTestCase(APITestCase):
     """
