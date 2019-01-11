@@ -93,10 +93,25 @@ class TestUserListTestCase(APITestCase):
         response = self.client.post(self.url, self.lesson_data4)
         eq_(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_post_request_with_invalid_hour(self):
+
+        self.lesson_data5 = ({
+            'student': self.student.pk,
+            'hour': '01:00:10',
+            'duration': '70',
+            'value': '10',
+            'weekdays': ['seg', 'ter', 'qua', 'qui', 'sex', 'sab'],
+        })
+
+        self.client.force_authenticate(self.user)
+        response = self.client.post(self.url, self.lesson_data5)
+        eq_(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_get_request(self):
         self.client.force_authenticate(self.user)
         response = self.client.get(self.url)
         eq_(response.status_code, status.HTTP_200_OK)
+
 
 class TestLessonDetailTestCase(APITestCase):
     """

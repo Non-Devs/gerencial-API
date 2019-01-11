@@ -2,6 +2,7 @@ from django.db import models
 from API.users.models import User
 from multiselectfield import MultiSelectField
 
+
 class Students(models.Model):
 
     first_name = models.CharField(
@@ -18,7 +19,6 @@ class Students(models.Model):
 
     telephone = models.CharField(
         max_length=14,
-        # validators=[validate_phone],
     )
 
     birthday = models.DateField()
@@ -36,7 +36,7 @@ class Students(models.Model):
         ('6f', '6º ano - fundamental'),
         ('7f', '7º ano - fundamental'),
         ('8f', '8º ano - fundamental'),
-        ('9a', '9º ano - fundamental'),
+        ('9f', '9º ano - fundamental'),
         ('1em', '1º ano - médio'),
         ('2em', '2º ano - médio'),
         ('3em', '3º ano - médio'),

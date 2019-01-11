@@ -54,6 +54,15 @@ class LessonSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("The maximum of possible days is 5!")
         return value
 
+    def validate_hour(self, value):
+
+        initial_work = datetime.time(7, 30)  # Initial working time
+        final_work = datetime.time(20, 0)  # Final working time
+        if not (initial_work <= value <= final_work):
+            raise serializers.ValidationError("Please insert a valid hour! It must be between " +
+                                              str(initial_work)[:5] + " and " + str(final_work)[:5] + ".")
+        return value
+
     def determine_final_hour(self, hour, duration):
         hour = hour
         datetime_hour = datetime.datetime.strptime(str(hour), '%H:%M')
