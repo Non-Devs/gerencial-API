@@ -1,14 +1,8 @@
-from django.test import TestCase
 from django.urls import reverse
-from django.forms.models import model_to_dict
-from django.contrib.auth.hashers import check_password
-from nose.tools import ok_, eq_
-from rest_framework.test import APITestCase, APIClient, \
-                                force_authenticate, APIRequestFactory
+from nose.tools import eq_
+from rest_framework.test import APITestCase
 from rest_framework import status
-from faker import Faker
 from API.users.models import User
-from API.users.test.factories import UserFactory
 from API.studies.models import Students
 
 

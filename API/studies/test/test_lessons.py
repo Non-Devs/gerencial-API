@@ -1,14 +1,8 @@
-from django.test import TestCase
 from django.urls import reverse
-from django.forms.models import model_to_dict
-from django.contrib.auth.hashers import check_password
-from nose.tools import ok_, eq_
-from rest_framework.test import APITestCase, APIClient, \
-                                force_authenticate, APIRequestFactory
+from nose.tools import eq_
+from rest_framework.test import APITestCase
 from rest_framework import status
-from faker import Faker
 from API.users.models import User
-from API.users.test.factories import UserFactory
 from API.studies.models import Students, Lesson
 
 
@@ -58,7 +52,7 @@ class TestUserListTestCase(APITestCase):
             'hour': '08:00:10',
             'duration': '70',
             'value': '10',
-            'weekdays': ['seg','qua'],
+            'weekdays': ['seg', 'qua'],
         })
 
         self.client.force_authenticate(self.user)
@@ -153,12 +147,12 @@ class TestLessonDetailTestCase(APITestCase):
         value = 15
         weekdays = ['seg', 'qua']
         payload = {
-                    "student": self.student1.pk,
-                    "hour": hour,
-                    "duration": duration,
-                    "value": value,
-                    "weekdays": weekdays,
-                   }
+            "student": self.student1.pk,
+            "hour": hour,
+            "duration": duration,
+            "value": value,
+            "weekdays": weekdays,
+        }
         response = self.client.put(self.url, payload)
         eq_(response.status_code, status.HTTP_200_OK)
 
@@ -168,11 +162,11 @@ class TestLessonDetailTestCase(APITestCase):
         value = 15
         weekdays = ['seg', 'qua']
         payload = {
-                    "student": self.student1.pk,
-                    "hour": hour,
-                    "duration": duration,
-                    "value": value,
-                    "weekdays": weekdays,
-                   }
+            "student": self.student1.pk,
+            "hour": hour,
+            "duration": duration,
+            "value": value,
+            "weekdays": weekdays,
+        }
         response = self.client.put(self.url, payload)
         eq_(response.status_code, status.HTTP_200_OK)

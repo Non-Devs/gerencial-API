@@ -3,7 +3,6 @@ from rest_framework.permissions import AllowAny
 from .models import Students, Lesson
 from .serializers import StudentsSerializer, LessonSerializer
 from .permissions import IsOwnerStudents, IsOwnerLesson
-import datetime
 
 
 class StudentsViewSet(mixins.RetrieveModelMixin,

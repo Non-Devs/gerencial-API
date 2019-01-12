@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Students, Lesson
 import datetime
-from dateutil.relativedelta import relativedelta
+
 
 class StudentsSerializer(serializers.ModelSerializer):
 
@@ -25,10 +25,7 @@ class LessonSerializer(serializers.ModelSerializer):
 
     def save(self, **kwargs):
 
-        validated_data = dict(
-            list(self.validated_data.items()) +
-            list(kwargs.items())
-        )
+        validated_data = dict(list(self.validated_data.items()) + list(kwargs.items()))
 
         if self.instance is not None:
             self.instance = self.update(self.instance, validated_data)
@@ -38,7 +35,7 @@ class LessonSerializer(serializers.ModelSerializer):
             ).time()
         else:
             self.instance = Lesson.objects.create(
-                **validated_data, 
+                **validated_data,
                 final_hour=self.determine_final_hour(
                     self.initial_data['hour'][:5],
                     self.initial_data['duration']
