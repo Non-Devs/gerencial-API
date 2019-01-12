@@ -1,5 +1,5 @@
 # Students
-Supports registering, viewing, and updating user accounts.
+Supports registering, viewing, and updating studens objects.
 
 ## Register a new student
 
