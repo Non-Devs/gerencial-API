@@ -33,21 +33,21 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="/assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.1.0">
     
     
       
-        <title>API</title>
+        <title>Authentication - API</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/application.11e41852.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.11e41852.css">
       
       
     
     
-      <script src="/assets/javascripts/modernizr.20ef595d.js"></script>
+      <script src="../../assets/javascripts/modernizr.20ef595d.js"></script>
     
     
       
@@ -56,7 +56,7 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="/assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
     
     
@@ -93,12 +93,16 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#authentication" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="/." title="API" class="md-header-nav__button md-logo">
+        <a href="../.." title="API" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -115,7 +119,7 @@
                 API
               </span>
               <span class="md-header-nav__topic">
-                
+                Authentication
               </span>
             
           
@@ -194,7 +198,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="/." title="API" class="md-nav__button md-logo">
+    <a href="../.." title="API" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -232,7 +236,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/." title="Gerencial" class="md-nav__link">
+    <a href="../.." title="Gerencial" class="md-nav__link">
       Gerencial
     </a>
   </li>
@@ -242,10 +246,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       API
@@ -261,11 +267,49 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="/api/authentication/" title="Authentication" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Authentication
+      </label>
+    
+    <a href="./" title="Authentication" class="md-nav__link md-nav__link--active">
       Authentication
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#retrieving-tokens" title="Retrieving Tokens" class="md-nav__link">
+    Retrieving Tokens
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -275,7 +319,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/api/users/" title="Users" class="md-nav__link">
+    <a href="../users/" title="Users" class="md-nav__link">
       Users
     </a>
   </li>
@@ -287,7 +331,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/api/students/" title="Students" class="md-nav__link">
+    <a href="../students/" title="Students" class="md-nav__link">
       Students
     </a>
   </li>
@@ -299,7 +343,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/api/lessons/" title="Lessons" class="md-nav__link">
+    <a href="../lessons/" title="Lessons" class="md-nav__link">
       Lessons
     </a>
   </li>
@@ -335,7 +379,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/documentation/doc_visao/" title="Documento de visão" class="md-nav__link">
+    <a href="../../documentation/doc_visao/" title="Documento de visão" class="md-nav__link">
       Documento de visão
     </a>
   </li>
@@ -347,7 +391,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/documentation/contrib/" title="Contribuindo" class="md-nav__link">
+    <a href="../../documentation/contrib/" title="Contribuindo" class="md-nav__link">
       Contribuindo
     </a>
   </li>
@@ -365,12 +409,93 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#retrieving-tokens" title="Retrieving Tokens" class="md-nav__link">
+    Retrieving Tokens
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
-  <h1>404 - Not found</h1>
+                
+                  <a href="https://github.com/Non-Devs/gerencial-API/edit/master/docs/api/authentication.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="authentication">Authentication</h1>
+<p>For clients to authenticate, the token key should be included in the Authorization HTTP header. The key should be prefixed by the string literal "Token", with whitespace separating the two strings. For example:</p>
+<pre><code>Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+</code></pre>
 
+<p>Unauthenticated responses that are denied permission will result in an HTTP <code>401 Unauthorized</code> response with an appropriate <code>WWW-Authenticate</code> header. For example:</p>
+<pre><code>WWW-Authenticate: Token
+</code></pre>
+
+<p>The curl command line tool may be useful for testing token authenticated APIs. For example:</p>
+<pre><code class="bash">curl -X GET http://127.0.0.1:8000/api/v1/example/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'
+</code></pre>
+
+<h2 id="retrieving-tokens">Retrieving Tokens</h2>
+<p>Authorization tokens are issued and returned when a user registers. A registered user can also retrieve their token with the following request:</p>
+<p><strong>Request</strong>:</p>
+<p><code>POST</code> <code>api-token-auth/</code></p>
+<p>Parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>The user's username</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>The user's password</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response</strong>:</p>
+<pre><code class="json">{ 
+    &quot;token&quot; : &quot;9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b&quot; 
+}
+</code></pre>
+                
+                  
+                
+              
               
                 
 
@@ -383,6 +508,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../.." title="Gerencial" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Gerencial
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../users/" title="Users" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Users
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -407,9 +567,9 @@
       
     </div>
     
-      <script src="/assets/javascripts/application.9e1f3b71.js"></script>
+      <script src="../../assets/javascripts/application.9e1f3b71.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"/"}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
     
     
